@@ -1,14 +1,10 @@
 import typing
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 from action import Action
-from bodypart_generator import ThreeLevelPartGenerator, BodyPart
-from constants import (
-    body_part_type,
-    teeth_attacking_power_additive,
-    names,
-    claws_attacking_power_multiplier,
-)
+from bodypart_generator import BodyPart, ThreeLevelPartGenerator
+from constants import (body_part_type, claws_attacking_power_multiplier, names,
+                       teeth_attacking_power_additive)
 
 
 class Attacking(BodyPart):

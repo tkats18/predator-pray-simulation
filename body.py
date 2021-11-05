@@ -2,7 +2,7 @@ import typing
 
 from action import Attack, Move
 from bodypart_initializer import BodyPartsInitializer
-from constants import MOVABLE, ATTACKER
+from constants import ATTACKER, MOVABLE
 
 
 class PlayerBody:

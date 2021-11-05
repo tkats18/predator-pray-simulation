@@ -1,16 +1,11 @@
 import typing
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 from action import Action
 from bodypart_generator import MaxTwoLimbGenerator
 from bodypart_initializer import BodyPart
-from constants import (
-    wing_action_mapping,
-    leg_action_mapping,
-    names,
-    body_part_type,
-    movement_type,
-)
+from constants import (body_part_type, leg_action_mapping, movement_type,
+                       names, wing_action_mapping)
 
 
 class Movable(BodyPart):

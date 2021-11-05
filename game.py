@@ -1,8 +1,9 @@
 from dataclasses import dataclass
 
 from fight_strategy import StrongestFightingStrategy
-from initializer_strategy import PlayerInitializer, SequentialPositionInitializer
-from player import RTSPlayer, IRTSPlayer
+from initializer_strategy import (PlayerInitializer,
+                                  SequentialPositionInitializer)
+from player import IRTSPlayer, RTSPlayer
 from walking_strategy import FastestWalkingStrategy
 
 

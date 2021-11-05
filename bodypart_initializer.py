@@ -3,7 +3,7 @@ from abc import abstractmethod
 from typing import Protocol
 
 from attacker import Claws, Teeth
-from bodypart_generator import BodyPartGenerator, BodyPart
+from bodypart_generator import BodyPart, BodyPartGenerator
 from constants import body_part_type
 from movable import Legs, Wings
 
