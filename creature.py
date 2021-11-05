@@ -9,7 +9,8 @@ class Creature:
     stamina: int = 100
 
     def apply_attack(self, attack):
-        self.stamina = self.stamina - attack.damage_power
+        self.health = self.health - attack.damage_power
 
     def move(self, move):
         self.position = self.position + move.speed
+        self.stamina = self.stamina - move.uses_stamina

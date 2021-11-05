@@ -24,8 +24,10 @@ class RTSGameManager:
     def walk(prey: IRTSPlayer, predator: IRTSPlayer) -> bool:
         while prey.get_position() < predator.get_position():
             if not prey.move():
+                print("Pray ran into infinity")
                 return True
             if not predator.move():
+                print("Predator ran into infinity")
                 return True
         return False
 
@@ -33,7 +35,8 @@ class RTSGameManager:
     def fight(prey: IRTSPlayer, predator: IRTSPlayer) -> bool:
 
         while True:
-            if predator.get_stamina() < 0:
+            if predator.get_health() < 0:
+                print("Predator lost in fight")
                 return False
 
             cur_attack = predator.fight()
@@ -41,7 +44,8 @@ class RTSGameManager:
                 return False
 
             prey.apply_attack(cur_attack)
-            if prey.get_stamina() < 0:
+            if prey.get_health() < 0:
+                print("Prey lost in fight")
                 return False
 
             cur_attack = prey.fight()
@@ -59,20 +63,25 @@ class RTSGame(Game):
 
     def init_game(self):
         self.player_initializer = SequentialPositionInitializer(100)
+        print("INITIALIZING PREDATOR")
         self.predator = RTSPlayer(
             self.player_initializer,
             FastestWalkingStrategy(),
             StrongestFightingStrategy(),
+            "Predator "
         )
+
+        print("INITIALIZING PREY")
         self.pray = RTSPlayer(
             self.player_initializer,
             FastestWalkingStrategy(),
             StrongestFightingStrategy(),
+            "Prey "
         )
         self.game_manager = RTSGameManager()
 
     def play(self):
-        if self.game_manager.walk(self.pray, self.predator):
+        if not self.game_manager.walk(self.pray, self.predator):
             self.game_manager.fight(self.pray, self.predator)
 
     def reset(self):

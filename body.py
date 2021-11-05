@@ -22,3 +22,13 @@ class PlayerBody:
             for j in i.get_actions():
                 result.append(Attack(j.data))
         return result
+
+    def to_representation(self):
+        data = {MOVABLE: [], ATTACKER: []}
+        for i in self.body_parts.get(MOVABLE):
+            data[MOVABLE].append(i.to_representation())
+
+        for i in self.body_parts.get(ATTACKER):
+            data[ATTACKER].append(i.to_representation())
+
+        return data

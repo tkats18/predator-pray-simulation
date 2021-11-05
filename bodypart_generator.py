@@ -13,11 +13,14 @@ class BodyPart:
     def get_actions(self) -> typing.List[Action]:
         pass
 
+    def to_representation(self) -> str:
+        pass
+
 
 class BodyPartGenerator:
     @staticmethod
     def generate_max_two() -> int:
-        return random.Random().randrange(0, 2)
+        return random.Random().randrange(0, 3)
 
     @staticmethod
     def generate_tree_level_part() -> str:

@@ -26,6 +26,9 @@ class Wings(Movable, ABC):
     def get_name(self) -> str:
         return names["wing_name"]
 
+    def to_representation(self) -> str:
+        return self.get_name() + "  " + str(self.num_wings)
+
 
 class Legs(Movable, ABC):
     def __init__(self, generator: MaxTwoLimbGenerator):
@@ -39,10 +42,13 @@ class Legs(Movable, ABC):
     def get_name(self) -> str:
         return names["leg_name"]
 
+    def to_representation(self) -> str:
+        return self.get_name() + "  " + str(self.num_legs)
+
 
 def pack_movement_data(num_limbs: int, action_mapping) -> typing.Iterable[Action]:
     result = []
-    for i in range(num_limbs):
+    for i in range(num_limbs + 1):
         possible_moves = action_mapping[i]
         for j in possible_moves:
             data = movement_type[j]

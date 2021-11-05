@@ -19,7 +19,7 @@ class Attack:
 # ცალცალკე ტიპების შექმნა შემეძლო მაგრამ არგავაკეთე იმიტომ რომ
 # იგივე ჯენერიქობას მივიღებდი, აწი თუ მოუნდება დამატება ვინმეს კონსტანტებში ჩაამატებს და ვსო
 class Move:
-    move: int
+    move: str
     requires_stamina: int
     uses_stamina: int
     speed: int

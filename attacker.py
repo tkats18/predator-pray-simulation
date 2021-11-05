@@ -26,12 +26,15 @@ class Teeth(Attacking, ABC):
 
     def get_actions(self) -> typing.List[Action]:
         cur_power = (
-            self.attacking_power + teeth_attacking_power_additive[self.sharpness]
+                self.attacking_power + teeth_attacking_power_additive[self.sharpness]
         )
         return [Action(str(cur_power))]
 
     def get_name(self) -> str:
         return names["teeth_name"]
+
+    def to_representation(self) -> str:
+        return self.get_name() + "  " + str(self.attacking_power)
 
 
 class Claws(Attacking, ABC):
@@ -46,3 +49,6 @@ class Claws(Attacking, ABC):
 
     def get_name(self) -> str:
         return names["claw_name"]
+
+    def to_representation(self) -> str:
+        return self.get_name() + "  " + str(self.attacking_power)

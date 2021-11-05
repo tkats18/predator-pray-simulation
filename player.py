@@ -20,7 +20,7 @@ class IRTSPlayer:
     def get_position(self) -> int:
         pass
 
-    def get_stamina(self) -> int:
+    def get_health(self) -> int:
         pass
 
     def apply_attack(self, attack: Attack):
@@ -31,6 +31,8 @@ class DevelopedPlayer:
     def __init__(self, position: int, body_parts_initializer: BodyPartsInitializer):
         self.body = PlayerBody(body_parts_initializer)
         self.creature = Creature(position)
+        print(self.creature)
+        print(self.body.to_representation())
 
     def move(self, move: Move):
         self.creature.move(move)
@@ -53,22 +55,24 @@ class DevelopedPlayer:
     def get_position(self) -> int:
         return self.creature.position
 
-    def get_stamina(self):
-        return self.creature.stamina
+    def get_health(self):
+        return self.creature.health
 
 
 class RTSPlayer(IRTSPlayer):
     def __init__(
-        self,
-        initializer: PlayerInitializer,
-        walking_strategy: WalkingStrategy,
-        fighting_strategy: FightingStrategy,
+            self,
+            initializer: PlayerInitializer,
+            walking_strategy: WalkingStrategy,
+            fighting_strategy: FightingStrategy,
+            player_type: str
     ):
         self.developed_player = DevelopedPlayer(
             initializer.next_position(), WingedLeggedClawedTeethedInitializer()
         )
         self.walking_strategy = walking_strategy
         self.fighting_strategy = fighting_strategy
+        self.type = player_type
 
     def move(self) -> bool:
         move = self.walking_strategy.choose_move(
@@ -79,6 +83,7 @@ class RTSPlayer(IRTSPlayer):
             return False
 
         self.developed_player.move(move)
+        print(self.type + " Chose " + move.move)
         return True
 
     def fight(self) -> Attack:
@@ -89,8 +94,8 @@ class RTSPlayer(IRTSPlayer):
     def get_position(self) -> int:
         return self.developed_player.get_position()
 
-    def get_stamina(self) -> int:
-        return self.developed_player.get_stamina()
+    def get_health(self) -> int:
+        return self.developed_player.get_health()
 
     def apply_attack(self, attack: Attack):
         self.developed_player.apply_attack(attack)
