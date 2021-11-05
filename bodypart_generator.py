@@ -6,7 +6,7 @@ from action import Action
 from constants import power_mapping
 
 
-class BodyPart:
+class BodyPart(Protocol):
     def get_name(self) -> str:
         pass
 

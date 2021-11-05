@@ -11,24 +11,33 @@ class PlayerBody:
 
     def get_all_player_moves(self) -> typing.List[Move]:
         result: typing.List[Move] = []
-        for i in self.body_parts.get(MOVABLE):
-            for j in i.get_actions():
-                result.append(Move(data=j.data))
+        parts = self.body_parts.get(MOVABLE)
+        if parts is not None:
+            for i in parts:
+                for j in i.get_actions():
+                    result.append(Move(data=j.data))
         return result
 
     def get_all_player_attacks(self) -> typing.List[Attack]:
         result: typing.List[Attack] = []
-        for i in self.body_parts.get(ATTACKER):
-            for j in i.get_actions():
-                result.append(Attack(j.data))
+        parts = self.body_parts.get(ATTACKER)
+        if parts is not None:
+            for i in parts:
+                for j in i.get_actions():
+                    result.append(Attack(j.data))
         return result
 
-    def to_representation(self):
-        data = {MOVABLE: [], ATTACKER: []}
-        for i in self.body_parts.get(MOVABLE):
-            data[MOVABLE].append(i.to_representation())
+    def to_representation(self) -> typing.Dict[str, typing.List[str]]:
+        data: typing.Dict[str, typing.List[str]] = {MOVABLE: [], ATTACKER: []}
+        parts_attacker = self.body_parts.get(ATTACKER)
+        parts_movable = self.body_parts.get(MOVABLE)
 
-        for i in self.body_parts.get(ATTACKER):
-            data[ATTACKER].append(i.to_representation())
+        if parts_movable is not None:
+            for i in parts_movable:
+                data[MOVABLE].append(i.to_representation())
+
+        if parts_attacker is not None:
+            for i in parts_attacker:
+                data[ATTACKER].append(i.to_representation())
 
         return data

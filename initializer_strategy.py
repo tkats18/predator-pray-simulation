@@ -6,9 +6,8 @@ from typing import Protocol
 
 # in case product owner makes us write another type
 # of position initializer
-@dataclass
 class PlayerInitializer(Protocol):
-    def next_position(self):
+    def next_position(self) -> int:
         pass
 
 
@@ -17,7 +16,7 @@ class BasePositionInitializer:
     def next_position(self) -> int:
         pass
 
-    def __call__(self):
+    def __call__(self) -> int:
         return self.next_position()
 
 

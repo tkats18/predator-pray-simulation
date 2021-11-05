@@ -6,21 +6,21 @@ from action import Move
 
 
 class WalkingStrategy(Protocol):
-    def choose_move(self, moves: typing.List[Move]) -> Move:
+    def choose_move(self, moves: typing.List[Move]) -> typing.Optional[Move]:
         pass
 
 
 class BaseWalkingStrategy:
     @abstractmethod
-    def choose_move(self, moves: typing.List[Move]) -> Move:
+    def choose_move(self, moves: typing.List[Move]) -> typing.Optional[Move]:
         pass
 
-    def __call__(self, moves: typing.List[Move]):
-        self.choose_move(moves)
+    def __call__(self, moves: typing.List[Move]) -> typing.Optional[Move]:
+        return self.choose_move(moves)
 
 
 class FastestWalkingStrategy(BaseWalkingStrategy):
-    def choose_move(self, moves: typing.List[Move]) -> Move:
+    def choose_move(self, moves: typing.List[Move]) -> typing.Optional[Move]:
         res = None
 
         for i in moves:

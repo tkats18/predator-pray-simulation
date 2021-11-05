@@ -18,7 +18,7 @@ class BasePartsInitializer:
     def initialize_body_parts(self) -> typing.Dict[str, typing.List[BodyPart]]:
         return {}
 
-    def __call__(self):
+    def __call__(self) -> typing.Dict[str, typing.List[BodyPart]]:
         return self.initialize_body_parts()
 
 
@@ -28,7 +28,7 @@ class BasePartsInitializer:
 
 class WingedLeggedClawedTeethedInitializer(BasePartsInitializer):
     def initialize_body_parts(self) -> typing.Dict[str, typing.List[BodyPart]]:
-        result: typing.Dict[{str: typing.List[BodyPart]}] = {}
+        result: typing.Dict[str, typing.List[BodyPart]] = {}
 
         for i in body_part_type.keys():
             result[body_part_type[i]] = []

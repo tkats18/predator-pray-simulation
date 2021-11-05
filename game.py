@@ -1,20 +1,16 @@
 from dataclasses import dataclass
 
 from fight_strategy import StrongestFightingStrategy
-from initializer_strategy import (PlayerInitializer,
-                                  SequentialPositionInitializer)
+from initializer_strategy import PlayerInitializer, SequentialPositionInitializer
 from player import IRTSPlayer, RTSPlayer
 from walking_strategy import FastestWalkingStrategy
 
 
 class Game:
-    def init_game(self):
+    def init_game(self) -> None:
         pass
 
-    def play(self):
-        pass
-
-    def reset(self):
+    def play(self) -> None:
         pass
 
 
@@ -61,14 +57,14 @@ class RTSGame(Game):
     player_initializer: PlayerInitializer
     game_manager: RTSGameManager
 
-    def init_game(self):
+    def init_game(self) -> None:
         self.player_initializer = SequentialPositionInitializer(100)
         print("INITIALIZING PREDATOR")
         self.predator = RTSPlayer(
             self.player_initializer,
             FastestWalkingStrategy(),
             StrongestFightingStrategy(),
-            "Predator "
+            "Predator ",
         )
 
         print("INITIALIZING PREY")
@@ -76,13 +72,10 @@ class RTSGame(Game):
             self.player_initializer,
             FastestWalkingStrategy(),
             StrongestFightingStrategy(),
-            "Prey "
+            "Prey ",
         )
         self.game_manager = RTSGameManager()
 
-    def play(self):
+    def play(self) -> None:
         if not self.game_manager.walk(self.pray, self.predator):
             self.game_manager.fight(self.pray, self.predator)
-
-    def reset(self):
-        pass

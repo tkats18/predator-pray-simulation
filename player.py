@@ -2,8 +2,11 @@
 import typing
 
 from action import Attack, Move
-from body import BodyPartsInitializer, PlayerBody
-from bodypart_initializer import WingedLeggedClawedTeethedInitializer
+from body import PlayerBody
+from bodypart_initializer import (
+    BodyPartsInitializer,
+    WingedLeggedClawedTeethedInitializer,
+)
 from creature import Creature
 from fight_strategy import FightingStrategy
 from initializer_strategy import PlayerInitializer
@@ -14,7 +17,7 @@ class IRTSPlayer:
     def move(self) -> bool:
         pass
 
-    def fight(self) -> Attack:
+    def fight(self) -> typing.Optional[Attack]:
         pass
 
     def get_position(self) -> int:
@@ -23,7 +26,7 @@ class IRTSPlayer:
     def get_health(self) -> int:
         pass
 
-    def apply_attack(self, attack: Attack):
+    def apply_attack(self, attack: Attack) -> None:
         pass
 
 
@@ -34,10 +37,10 @@ class DevelopedPlayer:
         print(self.creature)
         print(self.body.to_representation())
 
-    def move(self, move: Move):
+    def move(self, move: Move) -> None:
         self.creature.move(move)
 
-    def apply_attack(self, attack: Attack):
+    def apply_attack(self, attack: Attack) -> None:
         self.creature.apply_attack(attack)
 
     def get_possible_moves(self) -> typing.List[Move]:
@@ -55,17 +58,17 @@ class DevelopedPlayer:
     def get_position(self) -> int:
         return self.creature.position
 
-    def get_health(self):
+    def get_health(self) -> int:
         return self.creature.health
 
 
 class RTSPlayer(IRTSPlayer):
     def __init__(
-            self,
-            initializer: PlayerInitializer,
-            walking_strategy: WalkingStrategy,
-            fighting_strategy: FightingStrategy,
-            player_type: str
+        self,
+        initializer: PlayerInitializer,
+        walking_strategy: WalkingStrategy,
+        fighting_strategy: FightingStrategy,
+        player_type: str,
     ):
         self.developed_player = DevelopedPlayer(
             initializer.next_position(), WingedLeggedClawedTeethedInitializer()
@@ -86,7 +89,7 @@ class RTSPlayer(IRTSPlayer):
         print(self.type + " Chose " + move.move)
         return True
 
-    def fight(self) -> Attack:
+    def fight(self) -> typing.Optional[Attack]:
         return self.fighting_strategy.choose_attack(
             self.developed_player.get_possible_attacks()
         )
@@ -97,5 +100,5 @@ class RTSPlayer(IRTSPlayer):
     def get_health(self) -> int:
         return self.developed_player.get_health()
 
-    def apply_attack(self, attack: Attack):
+    def apply_attack(self, attack: Attack) -> None:
         self.developed_player.apply_attack(attack)
