@@ -8,6 +8,7 @@ from game import RTSGame
 
 if __name__ == "__main__":
     game = RTSGame()
-    game.init_game()
-    print("INITALIZING GAME...")
-    game.play()
+    for i in range(100):
+        print("///////////////////////GAME " + str(i) + "///////////////////////")
+        game.init_game()
+        game.play()

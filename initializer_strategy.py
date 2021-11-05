@@ -26,6 +26,6 @@ class SequentialPositionInitializer(BasePositionInitializer):
     last_position: int
 
     def next_position(self) -> int:
-        res = random.randrange(0, self.last_position)
+        res = random.randrange(0, self.last_position + 1)
         self.last_position = res
         return res
