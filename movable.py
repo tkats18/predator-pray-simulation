@@ -47,7 +47,7 @@ class Legs(Movable, ABC):
 
 
 def pack_movement_data(
-        num: int, mapping: typing.Dict[int, typing.List[typing.Any]]
+    num: int, mapping: typing.Dict[int, typing.List[typing.Any]]
 ) -> typing.List[Action]:
     result = []
     for i in range(num + 1):

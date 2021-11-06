@@ -25,18 +25,26 @@ def test_creature_attack(creature: Creature) -> None:
 
 
 def test_creature_move(creature: Creature) -> None:
-    creature.move(Move({"uses_stamina": 20, "speed": 10, "move": "test", "requires_stamina": 40}))
+    creature.move(
+        Move({"uses_stamina": 20, "speed": 10, "move": "test", "requires_stamina": 40})
+    )
     assert creature.stamina == 80
     assert creature.position == 10
 
-    creature.move(Move({"uses_stamina": 30, "speed": 10,"move": "test", "requires_stamina": 40}))
+    creature.move(
+        Move({"uses_stamina": 30, "speed": 10, "move": "test", "requires_stamina": 40})
+    )
     assert creature.stamina == 50
     assert creature.position == 20
 
-    creature.move(Move({"uses_stamina": 50, "speed": 10,"move": "test", "requires_stamina": 50}))
+    creature.move(
+        Move({"uses_stamina": 50, "speed": 10, "move": "test", "requires_stamina": 50})
+    )
     assert creature.stamina == 0
     assert creature.position == 30
 
-    creature.move(Move({"uses_stamina": 0, "speed": 10,"move": "test", "requires_stamina": 1}))
+    creature.move(
+        Move({"uses_stamina": 0, "speed": 10, "move": "test", "requires_stamina": 1})
+    )
     assert creature.stamina == 0
     assert creature.position == 30
