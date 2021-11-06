@@ -37,7 +37,7 @@ def test_movement_action_init(body: PlayerBody) -> None:
 
 def test_legs(body: PlayerBody) -> None:
     legs = Legs(BodyPartGenerator())
-    assert 0 <= legs.num_legs <= 3
+    assert 0 <= legs.num_legs <= 2
 
     if legs.num_legs == 0:
         assert legs.get_actions().__len__() == 1
@@ -46,7 +46,7 @@ def test_legs(body: PlayerBody) -> None:
         assert legs.get_actions().__len__() == 2
 
     if legs.num_legs == 2:
-        assert legs.get_actions().__len__() == 3
+        assert legs.get_actions().__len__() == 3 or legs.get_actions().__len__() == 4
 
 
 def test_wings(body: PlayerBody) -> None:
