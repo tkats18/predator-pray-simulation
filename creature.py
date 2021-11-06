@@ -14,5 +14,6 @@ class Creature:
         self.health = self.health - attack.damage_power
 
     def move(self, move: Move) -> None:
-        self.position = self.position + move.speed
-        self.stamina = self.stamina - move.uses_stamina
+        if self.stamina >= move.requires_stamina:
+            self.position = self.position + move.speed
+            self.stamina = self.stamina - move.uses_stamina
