@@ -1,5 +1,3 @@
-from dataclasses import dataclass
-
 from fight_strategy import StrongestFightingStrategy
 from initializer_strategy import PlayerInitializer, SequentialPositionInitializer
 from player import IRTSPlayer, RTSPlayer
@@ -14,7 +12,6 @@ class Game:
         pass
 
 
-@dataclass
 class RTSGameManager:
     @staticmethod
     def walk(prey: IRTSPlayer, predator: IRTSPlayer) -> bool:
